@@ -1,3 +1,5 @@
 FROM alpine:latest
-COPY . .
-CMD test -f "$HOME/.quadriga.yml" || ./quadriga config -k $key; ./quadriga http -p $port $flags
+RUN wget https://get.quadriga.app/apk/$(apk --print-arch)/quadriga
+RUN chmod +x quadriga
+RUN mv quadriga /usr/local/bin
+ENTRYPOINT ["quadriga"]
